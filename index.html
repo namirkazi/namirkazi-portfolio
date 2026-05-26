@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammed Namir Kazi — Cybersecurity Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0f11;
+      --surface: #161719;
+      --border: #252628;
+      --text: #e2e4e9;
+      --muted: #888b94;
+      --accent: #4ade80;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --font-sans: 'IBM Plex Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* ── NAV ─────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(14, 15, 17, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    /* desktop links */
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      padding: 0.25rem 0;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* hamburger button */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-toggle span {
+      display: block;
+      height: 1.5px;
+      background: var(--muted);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s, background 0.2s;
+      transform-origin: center;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: var(--text); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: var(--text); }
+
+    /* mobile drawer */
+    .nav-drawer {
+      display: none;
+      flex-direction: column;
+      background: rgba(14, 15, 17, 0.98);
+      border-top: 1px solid var(--border);
+      padding: 0.75rem 0 1rem;
+    }
+
+    .nav-drawer a {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.85rem 1.5rem;
+      display: block;
+      transition: color 0.15s, background 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-drawer a:active { background: var(--surface); color: var(--text); }
+    .nav-drawer.open { display: flex; }
+
+    /* ── LAYOUT ──────────────────────────── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    /* ── HERO ────────────────────────────── */
+    #hero {
+      padding-top: 6rem;
+      padding-bottom: 4rem;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 7vw, 2.8rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      padding: 0.6rem 1.1rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      min-height: 40px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0e0f11;
+      font-weight: 500;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:active { background: #86efac; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:active { color: var(--text); border-color: #3a3b3e; }
+
+    /* ── SECTION HEADERS ─────────────────── */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    /* ── EXPERIENCE ──────────────────────── */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0 1.75rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .exp-meta { padding-top: 2px; }
+
+    .exp-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .exp-company {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      margin-top: 0.25rem;
+      line-height: 1.4;
+    }
+
+    .exp-role {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-body {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .exp-body li {
+      list-style: none;
+      padding-left: 1rem;
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-body li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    /* ── SKILLS ──────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      padding: 1.1rem;
+    }
+
+    .skill-group-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.65rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    /* ── PROJECTS ────────────────────────── */
+    .projects-grid {
+      display: grid;
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 1.25rem;
+      transition: background 0.2s;
+    }
+
+    .project-card:active { background: #1c1d1f; }
+
+    .project-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 0.85rem;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    /* ── EDUCATION ───────────────────────── */
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edu-item:last-child { border-bottom: none; }
+
+    .edu-degree {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-school {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .edu-year {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── CERT ────────────────────────────── */
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-top: 1.75rem;
+    }
+
+    .cert-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .cert-name { font-size: 0.88rem; font-weight: 500; }
+    .cert-issuer { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
+
+    /* ── CONTACT ─────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1rem 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: border-color 0.2s;
+      min-height: 60px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .contact-item:active { border-color: #3a3b3e; }
+
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      font-size: 0.82rem;
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    /* ── FOOTER ──────────────────────────── */
+    footer {
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE: TABLET ──────────────── */
+    @media (max-width: 640px) {
+      /* show hamburger, hide inline links */
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+
+      section { padding: 3rem 0; }
+      #hero { padding-top: 5rem; padding-bottom: 3rem; }
+
+      /* stack experience meta above content */
+      .exp-item {
+        grid-template-columns: 1fr;
+        gap: 0.35rem;
+        margin-bottom: 2rem;
+      }
+
+      .exp-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .exp-company { margin-top: 0; }
+
+      /* skills: 2-col on phones */
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* edu: stack on very small screens */
+      .edu-item {
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .edu-year { font-size: 11px; }
+
+      /* contact: 1 col on small phones */
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── RESPONSIVE: SMALL PHONES ─────────── */
+    @media (max-width: 380px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .hero-links { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">mnk.dev</a>
+
+      <!-- desktop -->
+      <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- mobile hamburger -->
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- mobile drawer -->
+    <div class="nav-drawer" id="navDrawer">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="container">
+        <p class="hero-eyebrow">// available for full-time roles</p>
+        <h1>Mohammed<br>Namir Kazi</h1>
+        <p class="hero-sub">
+          Cybersecurity professional specialising in VAPT, cloud security, and ethical hacking.
+          B.E. in Computer Science (IoT &amp; Cyber Security) · Mumbai, India.
+          Currently pursuing CEH v13 (AI-Powered).
+        </p>
+        <div class="hero-links">
+          <a href="mailto:namir2004@gmail.com" class="btn btn-primary">Get in touch</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
+          <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-outline">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <p class="section-label">// work</p>
+        <h2>Experience</h2>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-date">2025</div>
+            <div class="exp-company">L&T Finance</div>
+          </div>
+          <div>
+            <p class="exp-role">Information Security Intern</p>
+            <ul class="exp-body">
+              <li>Conducted end-to-end VAPT across internal systems, identifying and documenting critical security gaps aligned with industry frameworks.</li>
+              <li>Engineered an internal AI-powered chatbot to automate data retrieval workflows, reducing manual lookup time across teams.</li>
+              <li>Triaged vulnerabilities with the security team, prioritised remediation, and produced detailed risk assessment reports for stakeholders.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-date">2023</div>
+            <div class="exp-company">E-Brandz</div>
+          </div>
+          <div>
+            <p class="exp-role">Web Developer Intern</p>
+            <ul class="exp-body">
+              <li>Built and maintained scalable front-end and back-end components for multiple client websites.</li>
+              <li>Integrated Google Cloud Logging and Monitoring to enable proactive anomaly detection across applications.</li>
+              <li>Executed on-page and technical SEO strategies that improved organic search rankings for client portfolios.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-date">2022</div>
+            <div class="exp-company">Tejas Cyber Solutions</div>
+          </div>
+          <div>
+            <p class="exp-role">Cloud Engineer Intern</p>
+            <ul class="exp-body">
+              <li>Managed and hardened cloud infrastructure on Microsoft Azure and GCP, applying security best practices.</li>
+              <li>Performed data export and migration across cloud environments, ensuring integrity and confidentiality of assets.</li>
+              <li>Gained hands-on exposure to cloud monitoring, IAM configurations, and secure storage policies.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <p class="section-label">// builds</p>
+        <h2>Projects</h2>
+        <div class="projects-grid">
+
+          <div class="project-card">
+            <p class="project-title">AI-Powered Discord Therapy Bot</p>
+            <p class="project-desc">Python-based Discord bot providing mental health support with natural language understanding for empathetic, context-aware interactions.</p>
+            <div class="project-stack">
+              <span class="tag">Python</span>
+              <span class="tag">discord.py</span>
+              <span class="tag">SQLite</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <p class="project-title">Geolocation-Based Attendance System</p>
+            <p class="project-desc">Full-stack web application for automated institute-wide attendance tracking using student geolocation, eliminating proxy attendance.</p>
+            <div class="project-stack">
+              <span class="tag">PHP</span>
+              <span class="tag">Java</span>
+              <span class="tag">SQL</span>
+              <span class="tag">HTML/CSS</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <p class="project-title">Book &amp; Goods Donation Platform</p>
+            <p class="project-desc">Donor-student matching platform enabling seamless contribution of books and goods with user authentication and inventory management.</p>
+            <div class="project-stack">
+              <span class="tag">Node.js</span>
+              <span class="tag">Bootstrap</span>
+              <span class="tag">MySQL</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <p class="project-title">Road Side Rescue</p>
+            <p class="project-desc">Real-time web application connecting stranded drivers with nearby mechanics, featuring live request routing and status tracking.</p>
+            <div class="project-stack">
+              <span class="tag">PHP</span>
+              <span class="tag">Bootstrap</span>
+              <span class="tag">SQL</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <p class="project-title">IoT Water Detection &amp; Mitigation</p>
+            <p class="project-desc">IoT-based flame detection system that auto-triggers extinguishing mechanisms with GSM alerts for remote notifications.</p>
+            <div class="project-stack">
+              <span class="tag">Arduino Uno</span>
+              <span class="tag">GSM-900</span>
+              <span class="tag">Flame Sensor</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <p class="project-title">Android Stress Detection App</p>
+            <p class="project-desc">Android application to detect and manage student stress levels, providing personalised therapy resources and real-time support.</p>
+            <div class="project-stack">
+              <span class="tag">Android (Java)</span>
+              <span class="tag">SQLite</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <p class="section-label">// toolkit</p>
+        <h2>Skills</h2>
+        <div class="skills-grid">
+
+          <div class="skill-group">
+            <p class="skill-group-label">Security</p>
+            <div class="skill-tags">
+              <span class="tag">Nmap</span>
+              <span class="tag">Metasploit</span>
+              <span class="tag">Burp Suite</span>
+              <span class="tag">Wireshark</span>
+              <span class="tag">VAPT</span>
+              <span class="tag">MITRE ATT&CK</span>
+              <span class="tag">IDS/IPS</span>
+              <span class="tag">Cryptography</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Cloud &amp; DevOps</p>
+            <div class="skill-tags">
+              <span class="tag">GCP</span>
+              <span class="tag">Azure</span>
+              <span class="tag">Docker</span>
+              <span class="tag">VMware</span>
+              <span class="tag">VirtualBox</span>
+              <span class="tag">Git</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Programming</p>
+            <div class="skill-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Bash</span>
+              <span class="tag">PowerShell</span>
+              <span class="tag">C++</span>
+              <span class="tag">Java</span>
+              <span class="tag">PHP</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Networking</p>
+            <div class="skill-tags">
+              <span class="tag">TCP/IP</span>
+              <span class="tag">DNS</span>
+              <span class="tag">Firewalls</span>
+              <span class="tag">VPNs</span>
+              <span class="tag">Network Monitoring</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Web &amp; DB</p>
+            <div class="skill-tags">
+              <span class="tag">Node.js</span>
+              <span class="tag">PHP</span>
+              <span class="tag">RESTful APIs</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">Bootstrap</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Operating Systems</p>
+            <div class="skill-tags">
+              <span class="tag">Kali Linux</span>
+              <span class="tag">Ubuntu</span>
+              <span class="tag">Windows</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & CERTS -->
+    <section id="education">
+      <div class="container">
+        <p class="section-label">// background</p>
+        <h2>Education &amp; Certifications</h2>
+
+        <div class="edu-item">
+          <div>
+            <p class="edu-degree">B.E. — Computer Science, IoT &amp; Cyber Security</p>
+            <p class="edu-school">M.H. Saboo Siddik College of Engineering, Mumbai</p>
+          </div>
+          <span class="edu-year">2023 – 2026</span>
+        </div>
+
+        <div class="edu-item">
+          <div>
+            <p class="edu-degree">Diploma — Computer Science Engineering</p>
+            <p class="edu-school">M.H. Saboo Siddik Polytechnic, Mumbai</p>
+          </div>
+          <span class="edu-year">2020 – 2023</span>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <p class="cert-name">Certified Ethical Hacker v13 (AI-Powered)</p>
+            <p class="cert-issuer">EC-Council · In Progress</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <p class="section-label">// reach out</p>
+        <h2>Contact</h2>
+        <div class="contact-grid">
+          <a href="mailto:namir2004@gmail.com" class="contact-item">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">namir2004@gmail.com</span>
+          </a>
+          <a href="tel:+919892576813" class="contact-item">
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">+91 98925 76813</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-item">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">linkedin.com ↗</span>
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener" class="contact-item">
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">github.com ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 Mohammed Namir Kazi &nbsp;·&nbsp; Built for recruiters, not robots.
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const drawer = document.getElementById('navDrawer');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = drawer.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // close drawer when a nav link is tapped
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
