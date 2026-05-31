@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Mohammed Namir Kazi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+
+    .project-card::before {
+      content: attr(data-num);
+      position: absolute;
+      top: 1rem; right: 1rem;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--border2);
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+
+    .project-card:hover { background: var(--surface2); }
+    .project-card:hover::before { color: var(--accent); }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--ease);
+    }
+    .project-card:hover::after { transform: scaleX(1); }
+
+    .project-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      opacity: 0.6;
+      letter-spacing: 0.08em;
+    }
+
+    .project-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 560px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">mnk.dev</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-drawer" id="navDrawer">
+    <a href="index.html">Home</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="skills.html">Skills</a>
+    <a href="education.html">Education</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="page">
+  <p class="page-eyebrow reveal">// what i've built</p>
+  <h1 class="page-title reveal">Projects</h1>
+  <p class="page-subtitle reveal">A mix of security tools, full-stack applications, and IoT experiments — built to solve real problems.</p>
+
+  <div class="projects-grid stagger">
+
+    <div class="project-card" data-num="01">
+      <p class="project-title">AI-Powered Discord Therapy Bot</p>
+      <p class="project-desc">Python-based Discord bot providing mental health support with natural language understanding for empathetic, context-aware interactions. Includes session memory and user mood tracking.</p>
+      <div class="project-stack">
+        <span class="tag">Python</span>
+        <span class="tag">discord.py</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">NLP</span>
+      </div>
+    </div>
+
+    <div class="project-card" data-num="02">
+      <p class="project-title">Geolocation-Based Attendance System</p>
+      <p class="project-desc">Full-stack web application for automated institute-wide attendance tracking using student geolocation, effectively eliminating proxy attendance across all departments.</p>
+      <div class="project-stack">
+        <span class="tag">PHP</span>
+        <span class="tag">Java</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Geolocation API</span>
+      </div>
+    </div>
+
+    <div class="project-card" data-num="03">
+      <p class="project-title">Book &amp; Goods Donation Platform</p>
+      <p class="project-desc">Donor-student matching platform enabling seamless contribution of books and goods, with user authentication, inventory management, and request fulfilment workflows.</p>
+      <div class="project-stack">
+        <span class="tag">Node.js</span>
+        <span class="tag">Bootstrap</span>
+        <span class="tag">MySQL</span>
+      </div>
+    </div>
+
+    <div class="project-card" data-num="04">
+      <p class="project-title">Road Side Rescue</p>
+      <p class="project-desc">Real-time web application connecting stranded drivers with nearby mechanics, featuring live request routing, status tracking, and mechanic availability management.</p>
+      <div class="project-stack">
+        <span class="tag">PHP</span>
+        <span class="tag">Bootstrap</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Real-time</span>
+      </div>
+    </div>
+
+    <div class="project-card" data-num="05">
+      <p class="project-title">IoT Water Detection &amp; Mitigation</p>
+      <p class="project-desc">IoT-based flame detection system that auto-triggers extinguishing mechanisms with GSM alerts for remote notifications. Built on Arduino with real-time sensor monitoring.</p>
+      <div class="project-stack">
+        <span class="tag">Arduino Uno</span>
+        <span class="tag">GSM-900</span>
+        <span class="tag">Flame Sensor</span>
+        <span class="tag">C++</span>
+      </div>
+    </div>
+
+    <div class="project-card" data-num="06">
+      <p class="project-title">Android Stress Detection App</p>
+      <p class="project-desc">Android application to detect and manage student stress levels, providing personalised therapy resources and real-time support based on behavioural pattern analysis.</p>
+      <div class="project-stack">
+        <span class="tag">Android (Java)</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">Sensor APIs</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>© 2026 Mohammed Namir Kazi &nbsp;·&nbsp; Built for recruiters, not robots.</footer>
+<script src="shared.js"></script>
+</body>
+</html>

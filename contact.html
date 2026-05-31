@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Mohammed Namir Kazi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 1.4rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.25s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::after {
+      content: '↗';
+      position: absolute;
+      top: 1rem; right: 1rem;
+      font-size: 12px;
+      color: var(--border2);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .contact-card:hover {
+      background: var(--surface2);
+      border-color: var(--border2);
+      transform: translateY(-2px);
+    }
+    .contact-card:hover::after { color: var(--accent); transform: translate(2px,-2px); }
+
+    .contact-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      font-size: 0.88rem;
+      color: var(--text);
+      word-break: break-all;
+      padding-right: 1.5rem;
+    }
+
+    .contact-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .availability {
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      border-radius: 4px;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .avail-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 5px;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+      50% { opacity: 0.5; box-shadow: 0 0 0 6px rgba(74,222,128,0); }
+    }
+
+    .avail-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .avail-text strong { color: var(--text); font-weight: 500; }
+
+    @media (max-width: 480px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">mnk.dev</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="education.html">Education</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-drawer" id="navDrawer">
+    <a href="index.html">Home</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="skills.html">Skills</a>
+    <a href="education.html">Education</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="page">
+  <p class="page-eyebrow reveal">// reach out</p>
+  <h1 class="page-title reveal">Contact</h1>
+  <p class="page-subtitle reveal">Open to full-time roles in cybersecurity, cloud security, or security engineering. Based in Mumbai — open to relocation.</p>
+
+  <div class="contact-grid stagger">
+
+    <a href="mailto:namir2004@gmail.com" class="contact-card">
+      <span class="contact-label">Email</span>
+      <span class="contact-value">namir2004@gmail.com</span>
+      <span class="contact-sub">Best way to reach me</span>
+    </a>
+
+    <a href="tel:+971509092110" class="contact-card">
+      <span class="contact-label">Phone</span>
+      <span class="contact-value">+971 50909 2110</span>
+      <span class="contact-sub">UAE</span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/mohammed-namir-kazi/" target="_blank" rel="noopener" class="contact-card">
+      <span class="contact-label">LinkedIn</span>
+      <span class="contact-value">mohammed-namir-kazi</span>
+      <span class="contact-sub">Connect with me</span>
+    </a>
+
+    <a href="https://github.com/namirkazi" target="_blank" rel="noopener" class="contact-card">
+      <span class="contact-label">GitHub</span>
+      <span class="contact-value">namirkazi</span>
+      <span class="contact-sub">See my code</span>
+    </a>
+
+  </div>
+
+  <div class="availability reveal">
+    <div class="avail-dot"></div>
+    <p class="avail-text">
+      <strong>Currently available</strong> — actively looking for full-time roles in cybersecurity, VAPT, or cloud security.
+      Final year of B.E. completing in 2026. Happy to connect for internships, contract work, or full-time positions.
+    </p>
+  </div>
+</main>
+
+<footer>© 2026 Mohammed Namir Kazi &nbsp;·&nbsp; Built for recruiters, not robots.</footer>
+<script src="shared.js"></script>
+</body>
+</html>
