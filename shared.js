@@ -1,84 +1,71 @@
-/* shared.js */
-
-// ── NAV HAMBURGER ────────────────────────
-const toggle = document.querySelector('.nav-toggle');
-const drawer = document.getElementById('navDrawer');
-
-if (toggle && drawer) {
-  toggle.addEventListener('click', () => {
-    const isOpen = drawer.classList.toggle('open');
-    toggle.classList.toggle('open', isOpen);
-    toggle.setAttribute('aria-expanded', isOpen);
-  });
-  drawer.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      drawer.classList.remove('open');
-      toggle.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+'use strict';
+const menuButton = document.querySelector('.menu-toggle');
+const navigation = document.querySelector('#site-nav');
+function closeMenu() {
+  navigation?.classList.remove('is-open');
+  menuButton?.setAttribute('aria-expanded', 'false');
 }
-
-// ── ACTIVE NAV LINK ──────────────────────
-(function markActive() {
-  const page = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a, .nav-drawer a').forEach(a => {
-    const href = a.getAttribute('href');
-    if (href === page || (page === 'index.html' && href === 'index.html')) {
-      a.classList.add('active');
-    }
-  });
-})();
-
-// ── SCROLL REVEAL ────────────────────────
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      revealObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-
-document.querySelectorAll('.reveal, .stagger').forEach(el => {
-  revealObserver.observe(el);
+menuButton?.addEventListener('click', () => {
+  const open = menuButton.getAttribute('aria-expanded') !== 'true';
+  menuButton.setAttribute('aria-expanded', String(open));
+  navigation.classList.toggle('is-open', open);
 });
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && menuButton?.getAttribute('aria-expanded') === 'true') {
+    closeMenu(); menuButton.focus();
+  }
+});
+navigation?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+window.matchMedia('(min-width: 901px)').addEventListener('change', event => {
+  if (event.matches) closeMenu();
+});
+document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
-// ── CURSOR GLOW (desktop only) ───────────
-if (window.matchMedia('(pointer: fine)').matches) {
-  const glow = document.createElement('div');
-  glow.style.cssText = `
-    position:fixed; width:320px; height:320px;
-    border-radius:50%; pointer-events:none; z-index:0;
-    background: radial-gradient(circle, rgba(74,222,128,0.045) 0%, transparent 70%);
-    transform: translate(-50%,-50%);
-    transition: left 0.12s ease, top 0.12s ease;
-    left:-999px; top:-999px;
-  `;
-  document.body.appendChild(glow);
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top  = e.clientY + 'px';
+const projectRows = [...document.querySelectorAll('.project-row')];
+const filterButtons = [...document.querySelectorAll('[data-filter]')];
+const searchInput = document.querySelector('#project-search');
+let selectedFilter = 'All';
+function filterProjects() {
+  const query = searchInput.value.trim().toLowerCase();
+  let count = 0;
+  projectRows.forEach(row => {
+    const visible = (selectedFilter === 'All' || row.dataset.category === selectedFilter)
+      && row.dataset.search.toLowerCase().includes(query);
+    row.hidden = !visible;
+    if (visible) count++;
   });
+  filterButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === selectedFilter)));
+  document.querySelector('#project-count').textContent = String(count);
+  document.querySelector('#no-results').hidden = count !== 0;
 }
-
-// ── PAGE TRANSITION ──────────────────────
-document.querySelectorAll('a[href]').forEach(a => {
-  const href = a.getAttribute('href');
-  if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('tel') || href.startsWith('http') || a.target === '_blank') return;
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    document.body.style.transition = 'opacity 0.18s ease';
-    document.body.style.opacity = '0';
-    setTimeout(() => { location.href = href; }, 180);
-  });
+filterButtons.forEach(button => button.addEventListener('click', () => {
+  selectedFilter = button.dataset.filter;
+  filterProjects();
+}));
+searchInput?.addEventListener('input', filterProjects);
+document.querySelector('#reset-search')?.addEventListener('click', () => {
+  selectedFilter = 'All'; searchInput.value = ''; filterProjects(); searchInput.focus();
 });
+function showLinkedProject() {
+  if (!projectRows.length || !location.hash) return;
+  let id;
+  try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+  const project = projectRows.find(row => row.id === id);
+  if (!project) return;
+  selectedFilter = 'All'; searchInput.value = ''; filterProjects();
+  const details = project.querySelector('details');
+  if (details) details.open = true;
+  requestAnimationFrame(() => project.scrollIntoView({block: 'start', behavior: 'instant'}));
+}
+showLinkedProject();
+window.addEventListener('hashchange', showLinkedProject);
 
-// fade in on load
-document.body.style.opacity = '0';
-window.addEventListener('DOMContentLoaded', () => {
-  requestAnimationFrame(() => {
-    document.body.style.transition = 'opacity 0.3s ease';
-    document.body.style.opacity = '1';
-  });
+document.querySelector('.copy-email')?.addEventListener('click', async () => {
+  const status = document.querySelector('.copy-status');
+  try {
+    await navigator.clipboard.writeText('namir2004@gmail.com');
+    status.textContent = 'Email copied.';
+  } catch {
+    status.textContent = 'Select the email address above to copy it.';
+  }
 });
